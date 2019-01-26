@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AddTask } from '../'
+import { connect } from 'react-redux';
+import { editTask } from '../../store/app/state';
+
 
 
 const Card = styled.div`
@@ -38,7 +41,7 @@ class TaskList extends React.PureComponent {
   render() {
     const { children, title, listId } = this.props;
     return (
-      <Card>
+      <Card onDragOver={this.onDragOver} onDrop={this.onDrop(listId)}>
         <h1>
           {title}
         </h1>
@@ -49,6 +52,21 @@ class TaskList extends React.PureComponent {
       </Card>
     );
   }
+
+  onDragOver = (event) => {
+    event.preventDefault();
+  }
+
+  onDrop = (listId) => (event) => {
+    let idTask = Number(event.dataTransfer.getData("id"));
+    this.props.editTask(listId, idTask)
+  }
+
 }
 
-export default TaskList;
+
+const mapDispatchToProps = (dispatch) => ({
+  editTask: (listId, idTask) => (dispatch(editTask({ listId, idTask })))
+})
+
+export default connect(null, mapDispatchToProps)(TaskList);

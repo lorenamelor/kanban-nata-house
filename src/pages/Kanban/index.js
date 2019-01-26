@@ -37,11 +37,11 @@ class Kanban extends React.Component {
 	}
 
 	render() {
-		const lists = [{ title: 'BackLog', listId: 0 },
-		{ title: 'To do', listId: 1 },
-		{ title: 'InProgress', listId: 2 },
-		{ title: 'Testing', listId: 3 },
-		{ title: 'Done', listId: 4 }]
+		const lists = [{ title: 'BackLog', listId: 1 },
+		{ title: 'To do', listId: 2 },
+		{ title: 'InProgress', listId: 3 },
+		{ title: 'Testing', listId: 4 },
+		{ title: 'Done', listId: 5 }]
 
 		const { tasksList } = this.props;
 		return (
@@ -57,7 +57,7 @@ class Kanban extends React.Component {
 							lists.map((list) =>
 								<TaskList title={list.title} key={list.listId} listId={list.listId}>
 									{tasksList.filter(function (task) { return task.listId === list.listId; }).map((task) =>
-										<Task task={task} key={task.text} />
+										<Task draggble task={task} key={task.text} />
 									)}
 								</TaskList>)
 						}
@@ -66,6 +66,7 @@ class Kanban extends React.Component {
 			</Page >
 		);
 	}
+
 }
 
 const mapStateToProps = (state) => ({

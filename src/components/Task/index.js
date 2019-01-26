@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import state, { removeTask, editTask } from '../../store/app/state';
+import { removeTask, editTask } from '../../store/app/state';
 import { Input } from '../'
 
 const Card = styled.div`
@@ -53,7 +53,7 @@ class Task extends React.Component {
     const { isEditingTask, textEdit } = this.state
 
     return (
-      <Card>
+      <Card draggable onDragStart={this.onDragStart(task.id)}>
         <span onClick={this.handleRemoveTask(task.id)}>x</span>
         <div onClick={this.handleEditTask}>
           {
@@ -75,13 +75,18 @@ class Task extends React.Component {
     );
   }
 
+  onDragStart = (id) => (event) => {
+    console.log(id)
+     event.dataTransfer.setData ("id", id)
+   }
+
   handleRemoveTask = (idTask) => () => {
     this.props.removeTask(idTask)
   }
 
   handleEditTask = () => {
-    this.setState(estado => ({
-      ...estado,
+    this.setState(state => ({
+      ...state,
       isEditingTask: !this.props.isEditingTask
     }));
   }

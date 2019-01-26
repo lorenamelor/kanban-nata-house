@@ -74,13 +74,21 @@ const editTaskEpic = (action$) => action$.pipe(
 	filter(editTask.match),
 	tap((action) => {
 		const tasks = getTasks();
-
+		console.log('payload',action.payload)
 		tasks.forEach((task) => {
+			console.log(task.id, action.payload.idTask)
 			if (task.id === action.payload.idTask) {
 				const index = tasks.indexOf(task);
 
 				if (index > -1) {
-					tasks[index].text = action.payload.textEdit
+					if (action.payload.textEdit) {
+						tasks[index].text = action.payload.textEdit
+					}
+					else {
+						if (action.payload.listId) {
+							tasks[index].listId = action.payload.listId
+						}
+					}
 					localStorage.setItem('tasks', JSON.stringify(tasks))
 				}
 			}
