@@ -2,8 +2,8 @@
 
 ###### Para rodar
 
-`npm i`
-`npm install`
+- `npm i`
+- `npm start`
 
 ###### Observações da aplicação
 
