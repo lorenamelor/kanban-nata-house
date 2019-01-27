@@ -61,7 +61,6 @@ class TaskList extends React.PureComponent {
     let idTask = Number(event.dataTransfer.getData("id"));
     this.props.editTask(listId, idTask)
   }
-
 }
 
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { createTask } from '../../store/app/state'
 import { connect } from 'react-redux';
 import { Input } from '../'
@@ -37,7 +36,6 @@ class AddTask extends React.PureComponent {
   }
 
   render() {
-    const { children, title, listId, countIdTasks } = this.props;
     return (
       <Wrapper>
         <input
@@ -46,8 +44,9 @@ class AddTask extends React.PureComponent {
           placeholder='Criar nova tarefa...'
           value={this.state.textTask}
           onChange={this.handleInputChange}
+          onKeyDown={this.handleKey}
         />
-        <button onClick={this.handleCreateTask(this.state.textTask, listId)}>+</button>
+        <button onClick={this.handleCreateTask}>+</button>
       </Wrapper>
     );
   }
@@ -58,9 +57,20 @@ class AddTask extends React.PureComponent {
     });
   }
 
-  handleCreateTask = (text, listId) => () => {
+  handleKey = (event) => {
+    if (event.key === 'Enter') {
+      this.handleCreateTask();
+    }
+  }
+  
+  handleCreateTask = () => {
+    const text = this.state.textTask
+    const listId = this.props.listId
+
+    //Criando um id auto increment
     const id = (Number(localStorage.getItem('countIdTasks')) || 0) + 1;
     localStorage.setItem('countIdTasks', id)
+
     const task = { id, text, listId }
     this.props.createTask(task)
     this.setState({
@@ -68,11 +78,6 @@ class AddTask extends React.PureComponent {
     });
   }
 }
-
-const mapStateToProps = (state) => ({
-  countIdTasks: selectCountIdTasks(state)
-});
-
 
 const mapDispatchToProps = (dispatch) => ({
   createTask: (task) => (dispatch(createTask({ task }))),

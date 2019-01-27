@@ -13,7 +13,7 @@ export const createTask = actionCreator('CREATE_TASK');
 export const removeTask = actionCreator('DELETE_TASK');
 export const editTask = actionCreator('EDIT_TASK');
 
-
+// SELECTS
 export const selectTasksList = ({ appState }) => appState.tasksList;
 
 
@@ -74,9 +74,7 @@ const editTaskEpic = (action$) => action$.pipe(
 	filter(editTask.match),
 	tap((action) => {
 		const tasks = getTasks();
-		console.log('payload',action.payload)
 		tasks.forEach((task) => {
-			console.log(task.id, action.payload.idTask)
 			if (task.id === action.payload.idTask) {
 				const index = tasks.indexOf(task);
 

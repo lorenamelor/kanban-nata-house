@@ -55,9 +55,10 @@ class Task extends React.Component {
     return (
       <Card draggable onDragStart={this.onDragStart(task.id)}>
         <span onClick={this.handleRemoveTask(task.id)}>x</span>
-        <div onClick={this.handleEditTask}>
+        <div onClick={this.handleEditTask} title="Clique para editar">
           {
-            !isEditingTask ?
+            !isEditingTask
+              ?
               <p>
                 {task.text}
               </p>
@@ -76,9 +77,8 @@ class Task extends React.Component {
   }
 
   onDragStart = (id) => (event) => {
-    console.log(id)
-     event.dataTransfer.setData ("id", id)
-   }
+    event.dataTransfer.setData("id", id)
+  }
 
   handleRemoveTask = (idTask) => () => {
     this.props.removeTask(idTask)
@@ -106,7 +106,6 @@ class Task extends React.Component {
       this.handleEditTask()
     }
   }
-
 }
 
 
