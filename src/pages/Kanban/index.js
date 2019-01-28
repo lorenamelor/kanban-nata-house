@@ -6,8 +6,10 @@ import { selectTasksList, searchTasks } from '../../store/app/state';
 import Logo from '../../assets/Logo/'
 
 const Page = styled.div`
+	height: 100%;
 	> .content {
 		margin: 20px;
+		height: 100%;
 	}
 	> header{
 		height: 55px;
@@ -25,7 +27,7 @@ const Page = styled.div`
 	white-space: nowrap;
     overflow-x: auto;
     padding-bottom: 8px;
-    height: -webkit-fill-available;
+    height: -webkit-calc(100% - 125px);
  }
 `
 

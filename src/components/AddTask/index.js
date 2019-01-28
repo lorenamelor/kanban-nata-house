@@ -32,8 +32,6 @@ const Wrapper = styled.div`
     }
    `
 
-
-
 class AddTask extends React.PureComponent {
   state = {
     textTask: ''

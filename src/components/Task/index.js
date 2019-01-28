@@ -6,7 +6,7 @@ import { Input } from '../'
 
 const Card = styled.div`
     cursor: pointer;
-    padding: 6px 12px 2px;
+    padding: 2px 12px;
     position: relative;
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
     min-height: 20px;
@@ -16,31 +16,41 @@ const Card = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
-    >span {
-      font-weight: 600;
-    color: #ea5757;
-    font-family: cursive;
+    > .actions  {
+      display: flex;
+      flex-direction: column;
+      font-size: 18px;
+      > span {
+          font-weight: 600;
+          font-family: cursive;
+          color: #ea5757;
+       }
+       & :first-child {
+        margin-bottom: 7px;
+      }
     }
-    div {
-      width:100%
+    > .body-text {
+      align-items: center;
+      width: 100%;
+      display: flex;
+      > p {
+        color: #676666;
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: normal;
+      white-space: initial;
+      }
+      > textarea {
+        background-color: rgba(9,45,66,.08);
+        border-radius: 3px;
+        color: #6b808c;
+        padding: 7px 9px;
+        border: none;
+        width: 90%;
+        resize: none;
+        margin: 3px 0;
+      }
     }
-    div > p {
-      color: #676666;
-    font-size: 14px;
-    margin-top: 10px;
-    font-weight: normal;
-    white-space: initial;
-    }
-    div > textarea {
-      background-color: rgba(9,45,66,.08);
-      border-radius: 3px;
-      color: #6b808c;
-      padding: 7px 9px;
-      border: none;
-      width: 90%;
-      resize: none;
-    }
-    
 `
 
 class Task extends React.Component {
@@ -52,11 +62,13 @@ class Task extends React.Component {
   render() {
     const { task } = this.props;
     const { isEditingTask, textEdit } = this.state
-
     return (
       <Card draggable onDragStart={this.onDragStart(task.id)}>
-        <span onClick={this.handleRemoveTask(task.id)}>x</span>
-        <div onClick={this.handleEditTask} title="Clique para editar">
+        <div className='actions'>
+          <span onClick={this.handleRemoveTask(task.id)}>x</span>
+           <span onClick={this.handleEditTask}><img src={require(`../../assets/${!isEditingTask ? 'edit' : 'save'}.png`)}/></span>
+        </div>
+        <div className='body-text' title="Clique para editar">
           {
             !isEditingTask
               ?
@@ -67,9 +79,11 @@ class Task extends React.Component {
               <textarea
                 type="text"
                 name="textEdit"
+                rows="3"
                 value={textEdit}
                 onChange={this.handleInputChange}
                 onKeyDown={this.handleKey}
+                onBlur={this.handleEditTask}
               />
           }
         </div>
@@ -81,29 +95,32 @@ class Task extends React.Component {
     event.dataTransfer.setData("id", id)
   }
 
-  handleRemoveTask = (idTask) => () => {
-    this.props.removeTask(idTask)
-  }
-
-  handleEditTask = () => {
-    this.setState(state => ({
-      ...state,
-      isEditingTask: !this.props.isEditingTask
-    }));
-  }
-
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
-  handleKey = (event) => {
-    if (event.key === 'Enter') {
+  handleRemoveTask = (idTask) => () => {
+    this.props.removeTask(idTask)
+  }
+
+  handleEditTask = () => {
+    if(this.state.isEditingTask){
       const textEdit = this.state.textEdit
       const idTask = this.props.task.id
 
       this.props.editTask(textEdit, idTask)
+    }
+
+    this.setState(state => ({
+      ...state,
+      isEditingTask: !this.state.isEditingTask
+    }));   
+  }
+
+  handleKey = (event) => {
+    if (event.key === 'Enter') {
       this.handleEditTask()
     }
   }

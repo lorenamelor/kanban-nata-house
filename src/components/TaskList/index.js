@@ -8,7 +8,6 @@ import { editTask } from '../../store/app/state';
 
 const Card = styled.div`
     width: 20%;
-    height: 100%;
     margin: 0 12px 0 4px;
     display: inline-block;
     box-sizing: border-box;
@@ -35,10 +34,7 @@ const Card = styled.div`
       padding: 16px;
       cursor: pointer;
     }
-    
     `
-
-
 
 
 class TaskList extends React.PureComponent {
