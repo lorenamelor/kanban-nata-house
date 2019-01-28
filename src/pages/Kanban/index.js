@@ -16,7 +16,6 @@ const Page = styled.div`
     display: flex;
 	}
 	> .content > h1 {
-		font-family: 'Roboto';
 		margin-bottom: 5px;
     font-weight: 400;
 		color: #333;
@@ -39,7 +38,7 @@ class Kanban extends React.Component {
 	render() {
 		const lists = [{ title: 'BackLog', listId: 1 },
 		{ title: 'To do', listId: 2 },
-		{ title: 'InProgress', listId: 3 },
+		{ title: 'In Progress', listId: 3 },
 		{ title: 'Testing', listId: 4 },
 		{ title: 'Done', listId: 5 }]
 

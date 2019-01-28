@@ -7,7 +7,7 @@ import { editTask } from '../../store/app/state';
 
 
 const Card = styled.div`
-    width: 272px;
+    width: 20%;
     height: 100%;
     margin: 0 12px 0 4px;
     display: inline-block;
@@ -16,6 +16,11 @@ const Card = styled.div`
     vertical-align: top;
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.1);
     border-radius: 4px;
+    
+    @media (max-width: 1370px) {
+      width: 272px;
+    }
+
     > h1 {
       color: white;
       margin: 0;
@@ -23,7 +28,6 @@ const Card = styled.div`
       font-size: 22px;
       background: #1F2227;
       font-weight: 300;
-      font-family: 'Roboto';
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
     }

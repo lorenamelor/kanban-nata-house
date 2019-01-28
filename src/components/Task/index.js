@@ -8,7 +8,6 @@ const Card = styled.div`
     cursor: pointer;
     padding: 6px 12px 2px;
     position: relative;
-    max-width: 300px;
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
     min-height: 20px;
     border-radius: 3px;
@@ -30,7 +29,6 @@ const Card = styled.div`
     font-size: 14px;
     margin-top: 10px;
     font-weight: normal;
-    font-family: Roboto;
     white-space: initial;
     }
     div > textarea {
@@ -39,7 +37,10 @@ const Card = styled.div`
       color: #6b808c;
       padding: 7px 9px;
       border: none;
+      width: 90%;
+      resize: none;
     }
+    
 `
 
 class Task extends React.Component {

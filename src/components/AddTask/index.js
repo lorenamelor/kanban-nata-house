@@ -14,7 +14,8 @@ const Wrapper = styled.div`
       color: #6b808c;
       padding: 7px 9px;
       border: none;
-      width: 80%;
+      width: 100%;
+      margin-right: 5px;
     }
     > button {
       cursor: pointer;
@@ -26,6 +27,9 @@ const Wrapper = styled.div`
       color: #fff;
       background: #16b5ac;
     }
+    > button:disabled{
+      background: #16b5ac94;
+    }
    `
 
 
@@ -36,17 +40,19 @@ class AddTask extends React.PureComponent {
   }
 
   render() {
+    const { textTask } = this.state
     return (
       <Wrapper>
-        <input
-          type="text"
-          name="textTask"
-          placeholder='Criar nova tarefa...'
-          value={this.state.textTask}
-          onChange={this.handleInputChange}
-          onKeyDown={this.handleKey}
-        />
-        <button onClick={this.handleCreateTask}>+</button>
+          <input
+            type="text"
+            name="textTask"
+            placeholder='Digite uma nova tarefa...'
+            value={textTask}
+            onChange={this.handleInputChange}
+            onKeyDown={this.handleKey}
+            required
+          />
+          <button disabled={textTask === ''} onClick={this.handleCreateTask}>+</button>
       </Wrapper>
     );
   }
@@ -62,7 +68,7 @@ class AddTask extends React.PureComponent {
       this.handleCreateTask();
     }
   }
-  
+
   handleCreateTask = () => {
     const text = this.state.textTask
     const listId = this.props.listId
