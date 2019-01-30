@@ -6,8 +6,10 @@ import { selectTasksList, searchTasks } from '../../store/app/state';
 import Logo from '../../assets/Logo/'
 
 const Page = styled.div`
+	height: 100%;
 	> .content {
 		margin: 20px;
+		height: 100%;
 	}
 	> header{
 		height: 55px;
@@ -16,7 +18,6 @@ const Page = styled.div`
     display: flex;
 	}
 	> .content > h1 {
-		font-family: 'Roboto';
 		margin-bottom: 5px;
     font-weight: 400;
 		color: #333;
@@ -26,7 +27,7 @@ const Page = styled.div`
 	white-space: nowrap;
     overflow-x: auto;
     padding-bottom: 8px;
-    height: -webkit-fill-available;
+    height: -webkit-calc(100% - 125px);
  }
 `
 
@@ -39,7 +40,7 @@ class Kanban extends React.Component {
 	render() {
 		const lists = [{ title: 'BackLog', listId: 1 },
 		{ title: 'To do', listId: 2 },
-		{ title: 'InProgress', listId: 3 },
+		{ title: 'In Progress', listId: 3 },
 		{ title: 'Testing', listId: 4 },
 		{ title: 'Done', listId: 5 }]
 
